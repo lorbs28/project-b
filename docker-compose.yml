@@ -6,6 +6,7 @@ services:
       - "5000:5000"
     links:
       - localdb
+      - jupyter
   localdb:
     image: "mysql:latest"
     environment:
@@ -19,3 +20,11 @@ services:
       - '3306'
     volumes:
       - ./mysql-data:/var/lib/mysql
+  jupyter:
+    image: "jupyter/base-notebook:latest"
+    ports:
+      - '8888:8888'
+    expose:
+      - '8888'
+    volumes:
+      - ./jupyter-data:/home/jovyan/work
