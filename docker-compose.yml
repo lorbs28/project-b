@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  myapplication:
+    build: .
+    ports:
+      - "5000:5000"
+    links:
+      - localdb
+  localdb:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_USER=myapplicationuser
+      - MYSQL_PASSWORD=abc123!@#
+      - MYSQL_DATABASE=myapplication
+      - MYSQL_ROOT_PASSWORD=password123
+    ports:
+      - '3308:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql-data:/var/lib/mysql
